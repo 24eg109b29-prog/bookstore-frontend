@@ -1,4 +1,6 @@
-const API = "/api";
+// Base API configuration: supports standalone deployments (Vercel/Netlify/GitHub Pages) and same-origin
+const BACKEND_URL = window.BACKEND_URL || localStorage.getItem("BACKEND_URL") || "";
+const API = `${BACKEND_URL}/api`;
 const state = { books: [], cart: new Map(), search: "", category: "", sort: "featured" };
 const $ = (id) => document.getElementById(id);
 const rupees = (n) => new Intl.NumberFormat("en-IN", {style:"currency",currency:"INR",maximumFractionDigits:0}).format(Number(n || 0));
@@ -24,7 +26,11 @@ async function loadBooks() {
     $("categoryFilter").innerHTML = '<option value="">All categories</option>' + categories.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
     renderBooks();
   } catch (error) {
-    $("bookGrid").innerHTML = `<div class="no-results">Could not load books. Make sure the Spring Boot server is running.<br><small>${escapeHtml(error.message)}</small></div>`;
+    let extraTip = "";
+    if (window.location.protocol.startsWith("http") && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1" && !BACKEND_URL) {
+      extraTip = `<br><br><button onclick="const u=prompt('Enter your deployed Backend URL (e.g. https://your-backend.onrender.com):'); if(u){localStorage.setItem('BACKEND_URL', u.trim().replace(/\\/$/,'')); location.reload();}" style="padding:8px 14px;cursor:pointer;border-radius:4px;border:1px solid #72815c;background:#2d4939;color:white;font-weight:600;font-size:12px;">🔗 Connect Backend URL</button>`;
+    }
+    $("bookGrid").innerHTML = `<div class="no-results">Could not load books. Make sure the backend server is running.<br><small>${escapeHtml(error.message)}</small>${extraTip}</div>`;
     $("bookTotal").textContent = "Connection issue";
   }
 }
