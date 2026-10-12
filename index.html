@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PageTurner — Online Bookstore</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-icon">P</span> PageTurner</a>
+  <nav><a href="#catalog">Browse books</a><a href="#about">About</a></nav>
+  <button class="cart-button" id="cartToggle" aria-label="Open cart">🛒 Cart <span id="cartCount">0</span></button>
+</header>
+<section class="hero">
+  <div class="hero-copy"><p class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</p><h1>Stories worth<br><em>staying up for.</em></h1>
+  <p class="hero-sub">Discover your next favourite read, from timeless classics to fresh perspectives.</p>
+  <a class="primary-link" href="#catalog">Explore the collection <span>→</span></a>
+  <div class="hero-stats"><div><strong>Curated reads</strong><small>Picked for curious minds</small></div><div><strong>Easy checkout</strong><small>Order in a few clicks</small></div></div></div>
+  <div class="hero-art"><div class="sun"></div><div class="book-stack"><div class="big-book"><span>THE ART OF<br>GETTING LOST</span><small>AND FINDING YOUR WAY</small></div><div class="little-book"></div></div><div class="art-note">A little more wonder<br>on every page ✳</div></div>
+</section>
+<main>
+  <section class="catalog-section" id="catalog">
+    <div class="section-heading"><div><p class="eyebrow">THE BOOKSHELF</p><h2>Find your next read</h2></div><span class="book-total" id="bookTotal">Loading books…</span></div>
+    <div class="toolbar"><label class="searchbox">⌕ <input id="searchInput" type="search" placeholder="Search title, author or category…"></label><select id="categoryFilter" aria-label="Filter category"><option value="">All categories</option></select><select id="sortSelect" aria-label="Sort books"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="title">Title A–Z</option></select></div>
+    <div id="bookGrid" class="book-grid"><div class="loading">Opening the bookshelf…</div></div>
+  </section>
+  <section id="about" class="about-strip"><div class="about-mark">✳</div><div><p class="eyebrow">A BOOKSTORE FOR EVERY MOOD</p><h2>Good books. Great journeys.</h2><p>Browse the collection, add books to your cart, and place a demo order securely through the bookstore API.</p></div></section>
+</main>
+<footer><a class="brand" href="#"><span class="brand-icon">P</span> PageTurner</a><span>Made for readers, one page at a time.</span><span>© 2026 PageTurner</span></footer>
+<div id="toast" class="toast" role="status"></div>
+<div id="cartOverlay" class="overlay hidden">
+  <aside class="cart-panel"><div class="cart-head"><div><p class="eyebrow">YOUR SELECTION</p><h2>Your cart</h2></div><button id="closeCart" class="icon-button" aria-label="Close cart">✕</button></div>
+  <div id="cartItems" class="cart-items"></div><div class="cart-bottom"><div class="cart-total"><span>Subtotal</span><strong id="cartTotal">₹0</strong></div><button id="checkoutButton" class="primary-button">Continue to checkout →</button><p class="fine-print">Demo checkout — no payment is collected.</p></div></aside>
+</div>
+<div id="checkoutOverlay" class="overlay hidden">
+  <section class="checkout-modal"><button id="closeCheckout" class="icon-button modal-close" aria-label="Close checkout">✕</button><p class="eyebrow">ALMOST YOURS</p><h2>Delivery details</h2><p class="muted">Fill in your details to place your demo order.</p>
+  <form id="checkoutForm"><label>Full name<input name="customerName" required maxlength="100" placeholder="Your name"></label><label>Email address<input name="email" type="email" required maxlength="160" placeholder="you@example.com"></label><label>Delivery address<textarea name="address" required maxlength="500" rows="3" placeholder="House number, street, city, PIN"></textarea></label><button class="primary-button" type="submit">Place order · <span id="checkoutTotal">₹0</span></button></form><div id="checkoutMessage" class="message"></div></section>
+</div>
+<script src="/app.js"></script>
+</body></html>
